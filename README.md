@@ -1,0 +1,2 @@
+# MyBlog
+ blog taking app
