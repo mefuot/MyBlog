@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.pong.myblog.R;
+import com.pong.myblog.database.BlogDbHelper;
 import com.pong.myblog.model.BlogModel;
 
 import java.util.Calendar;
@@ -27,6 +28,7 @@ import jp.wasabeef.richeditor.RichEditor;
  */
 
 public class BlogEditFragment extends Fragment {
+    private BlogDbHelper blogDbHelper;
     private RichEditor mEditor;
     private EditText mTitle;
     private EditText mDate;
@@ -47,7 +49,7 @@ public class BlogEditFragment extends Fragment {
 
         view.findViewById(R.id.button_add_new_blog).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                onAddNewBlog();
+                saveBlogToDatabase();
             }
         });
     }
@@ -247,10 +249,22 @@ public class BlogEditFragment extends Fragment {
         builder.show();
     }
 
-    private void onAddNewBlog(){
-        BlogModel blog = new BlogModel(mTitle.getText().toString(),
-                                        mDate.getText().toString(),
-                                        mEditor.getHtml());
+    private void saveBlogToDatabase(){
+        BlogModel blog = new BlogModel();
+        blog.setTitle(mTitle.getText().toString());
+        blog.setDate(mDate.getText().toString());
+        blog.setContent(mEditor.getHtml());
+
+        blogDbHelper = new BlogDbHelper(getActivity());
+        blogDbHelper.insertBlog(blog);
         Log.d("MyBlog",blog.getContent());
+    }
+
+    @Override
+    public void onDestroy() {
+        if(blogDbHelper!=null){
+            blogDbHelper.close();
+        }
+        super.onDestroy();
     }
 }
