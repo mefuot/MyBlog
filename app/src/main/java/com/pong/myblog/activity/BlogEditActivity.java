@@ -1,20 +1,18 @@
 package com.pong.myblog.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.pong.myblog.R;
 import com.pong.myblog.fragment.BlogEditFragment;
+import com.pong.myblog.listener.OnBlogEditFragmentListener;
 
 /**
  * Created by USER on 10/1/2560.
  */
 
-public class BlogEditActivity extends AppCompatActivity {
+public class BlogEditActivity extends AppCompatActivity implements OnBlogEditFragmentListener {
     private BlogEditFragment blogEditFragment;
 
     @Override
@@ -39,6 +37,11 @@ public class BlogEditActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
+    }
+
+    @Override
+    public void onAddedNewBlog() {
         finish();
     }
 }

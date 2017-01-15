@@ -17,6 +17,7 @@ import android.widget.EditText;
 
 import com.pong.myblog.R;
 import com.pong.myblog.database.BlogDbHelper;
+import com.pong.myblog.listener.OnBlogEditFragmentListener;
 import com.pong.myblog.model.BlogModel;
 
 import java.util.Calendar;
@@ -258,6 +259,8 @@ public class BlogEditFragment extends Fragment {
         blogDbHelper = new BlogDbHelper(getActivity());
         blogDbHelper.insertBlog(blog);
         Log.d("MyBlog",blog.getContent());
+
+        ((OnBlogEditFragmentListener) getActivity()).onAddedNewBlog();
     }
 
     @Override
