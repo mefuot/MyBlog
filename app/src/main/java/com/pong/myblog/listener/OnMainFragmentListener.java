@@ -5,5 +5,5 @@ package com.pong.myblog.listener;
  */
 
 public interface OnMainFragmentListener {
-    void onGotoBlogEditPage();
+    void onGoToCreateNewBlog();
 }

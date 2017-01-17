@@ -13,6 +13,8 @@ import java.util.List;
 public interface MainContract {
     interface MainView{
         void updateBlogList(List<BlogModel> list);
+        void gotoBlogEditPage(int blogId);
+        void gotoBlogPreviewPage(int blogId);
     }
     interface MainPresenter{
         void loadAllBlog(Context context);

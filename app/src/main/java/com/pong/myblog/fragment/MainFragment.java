@@ -46,7 +46,7 @@ public class MainFragment extends Fragment implements MainContract.MainView {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((OnMainFragmentListener) getActivity()).onGotoBlogEditPage();
+                gotoBlogEditPage(-1);
             }
         });
 
@@ -55,7 +55,6 @@ public class MainFragment extends Fragment implements MainContract.MainView {
         listView.setAdapter(adapter);
 
         presenter = new MainPresenter(this);
-        presenter.loadAllBlog(getActivity());
     }
 
     @Override
@@ -67,5 +66,17 @@ public class MainFragment extends Fragment implements MainContract.MainView {
     @Override
     public void updateBlogList(List<BlogModel> list) {
         adapter.updateBlogList(list);
+    }
+
+    @Override
+    public void gotoBlogEditPage(int blogId) {
+        if(blogId > 0){
+            ((OnMainFragmentListener) getActivity()).onGoToCreateNewBlog();
+        }
+    }
+
+    @Override
+    public void gotoBlogPreviewPage(int blogId) {
+
     }
 }

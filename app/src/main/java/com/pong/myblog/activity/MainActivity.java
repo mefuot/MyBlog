@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements OnMainFragmentLis
     }
 
     @Override
-    public void onGotoBlogEditPage() {
+    public void onGoToCreateNewBlog() {
         Intent intent = new Intent(this, BlogEditActivity.class);
         startActivity(intent);
     }
