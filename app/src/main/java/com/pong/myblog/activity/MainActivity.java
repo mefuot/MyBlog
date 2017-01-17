@@ -3,6 +3,7 @@ package com.pong.myblog.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,25 +11,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.pong.myblog.R;
+import com.pong.myblog.database.BlogDbHelper;
+import com.pong.myblog.fragment.BlogEditFragment;
+import com.pong.myblog.fragment.MainFragment;
+import com.pong.myblog.listener.OnMainFragmentListener;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements OnMainFragmentListener {
+    MainFragment mainFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_container);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openBlogEditActivity();
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-            }
-        });
+        if(savedInstanceState == null){
+            showMainFragment();
+        }
+    }
+
+    private void showMainFragment(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.addToBackStack(null);
+        mainFragment = new MainFragment();
+        ft.add(R.id.container, mainFragment);
+        ft.commit();
     }
 
     @Override
@@ -53,8 +58,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void openBlogEditActivity(){
+    @Override
+    public void onGotoBlogEditPage() {
         Intent intent = new Intent(this, BlogEditActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+//        finish();
     }
 }
