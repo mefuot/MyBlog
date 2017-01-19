@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,6 @@ import java.util.List;
 
 public class MainFragment extends Fragment implements MainContract.MainView {
     private MainPresenter presenter;
-    private ListView listView;
     private MainBlogAdapter adapter;
 
     @Nullable
@@ -50,7 +50,7 @@ public class MainFragment extends Fragment implements MainContract.MainView {
             }
         });
 
-        listView = (ListView) view.findViewById(R.id.listview);
+        ListView listView = (ListView) view.findViewById(R.id.listview);
         adapter = new MainBlogAdapter(getActivity(),null);
         listView.setAdapter(adapter);
 
@@ -71,6 +71,8 @@ public class MainFragment extends Fragment implements MainContract.MainView {
     @Override
     public void gotoBlogEditPage(int blogId) {
         if(blogId > 0){
+//            ((OnMainFragmentListener) getActivity()).onGoToExistBlog();
+        }else{
             ((OnMainFragmentListener) getActivity()).onGoToCreateNewBlog();
         }
     }
