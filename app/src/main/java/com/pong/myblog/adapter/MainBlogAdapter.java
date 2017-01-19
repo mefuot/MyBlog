@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
@@ -81,6 +82,18 @@ public class MainBlogAdapter extends BaseAdapter {
             holder.titleView.setText("title is null");
             holder.dateView.setText("date is null");
         }
+
+        holder.contentView.setVerticalScrollBarEnabled(false);
+        holder.contentView.setHorizontalScrollBarEnabled(false);
+
+        // May use in case of dont want link of webview clickable
+//        holder.contentView.getSettings().setJavaScriptEnabled(true);
+//        holder.contentView.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                return true;
+//            }
+//        });
     }
 
     private static class ViewHolder{
