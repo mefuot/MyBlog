@@ -53,6 +53,7 @@ public class MainFragment extends Fragment implements MainContract.MainView {
         ListView listView = (ListView) view.findViewById(R.id.listview);
         adapter = new MainBlogAdapter(getActivity(),null);
         listView.setAdapter(adapter);
+        listView.setDividerHeight(0);
 
         presenter = new MainPresenter(this);
     }

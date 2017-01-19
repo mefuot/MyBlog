@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray">
+    android:paddingBottom="@dimen/padding">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:layout_marginBottom="@dimen/size_line">
+        android:background="@android:color/white">
 
         <TextView
             android:id="@+id/textview_blogitem_title"
@@ -28,6 +27,10 @@
             android:textSize="@dimen/font_normal"/>
     </LinearLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_line"
+        android:background="@color/light_gray"/>
 
     <WebView
         android:id="@+id/webview_blogitem_content"
