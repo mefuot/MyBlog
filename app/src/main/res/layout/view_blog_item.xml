@@ -32,10 +32,16 @@
         android:layout_height="@dimen/size_line"
         android:background="@color/light_gray"/>
 
-    <WebView
-        android:id="@+id/webview_blogitem_content"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp">
-    </WebView>
+        android:layout_height="80dp"
+        android:descendantFocusability="blocksDescendants">
+
+        <com.pong.myblog.custom_view.NonClickableWebView
+            android:id="@+id/webview_blogitem_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.pong.myblog.custom_view.NonClickableWebView>
+    </FrameLayout>
 
 </LinearLayout>
