@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".activity.BlogEditActivity"
             android:label="Add new Blog"/>
+        <activity android:name=".activity.BlogPreviewActivity"
+            android:label="Blog"/>
     </application>
 
 </manifest>

@@ -65,6 +65,14 @@ public class MainActivity extends AppCompatActivity implements OnMainFragmentLis
     }
 
     @Override
+    public void onGoToBlogPreview(int blogId) {
+        Log.d("MyBlog","goto");
+        Intent intent = new Intent(this, BlogPreviewActivity.class);
+        intent.putExtra("blogId",blogId);
+        startActivity(intent);
+    }
+
+    @Override
     public void onBackPressed() {
 //        super.onBackPressed();
 //        finish();
