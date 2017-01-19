@@ -21,7 +21,7 @@ public class BlogDbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_BLOG_TABLE =
             "CREATE TABLE " + BlogModel.BlogColumns.TABLE_NAME + " (" +
-                    BlogModel.BlogColumns._ID + " INTEGER PRIMARY KEY," +
+                    BlogModel.BlogColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     BlogModel.BlogColumns.COLUMN_NAME_TITLE + " TEXT," +
                     BlogModel.BlogColumns.COLUMN_NAME_DATE + " TEXT," +
                     BlogModel.BlogColumns.COLUMN_NAME_CONTENT + " TEXT)";
@@ -69,14 +69,14 @@ public class BlogDbHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    public BlogModel getBlogById(BlogModel blogModel){
+    public BlogModel getBlogById(int blogId){
         SQLiteDatabase  db = this.getWritableDatabase();
         Cursor mCursor = db.rawQuery("SELECT " + BlogModel.BlogColumns._ID + ", "  +
                 BlogModel.BlogColumns.COLUMN_NAME_TITLE + ", " +
                 BlogModel.BlogColumns.COLUMN_NAME_DATE + ", " +
                 BlogModel.BlogColumns.COLUMN_NAME_CONTENT  + " FROM " +
                 BlogModel.BlogColumns.TABLE_NAME + " WHERE " +
-                BlogModel.BlogColumns._ID +" = "+blogModel.getId(), null);
+                BlogModel.BlogColumns._ID +" = "+blogId, null);
 
         BlogModel blog = new BlogModel();
 
@@ -92,13 +92,13 @@ public class BlogDbHelper extends SQLiteOpenHelper {
         return blog;
     }
 
-    public void insertBlog(BlogModel blog){
+    public Long insertBlog(BlogModel blog){
         SQLiteDatabase  db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(BlogModel.BlogColumns.COLUMN_NAME_TITLE, blog.getTitle());
         values.put(BlogModel.BlogColumns.COLUMN_NAME_DATE, blog.getDate());
         values.put(BlogModel.BlogColumns.COLUMN_NAME_CONTENT, blog.getContent());
 
-        db.insert(BlogModel.BlogColumns.TABLE_NAME, null, values);
+        return db.insert(BlogModel.BlogColumns.TABLE_NAME, null, values);
     }
 }
