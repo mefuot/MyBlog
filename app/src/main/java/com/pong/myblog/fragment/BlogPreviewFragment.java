@@ -42,7 +42,6 @@ public class BlogPreviewFragment extends Fragment implements BlogPreviewContract
         textDate = (TextView) view.findViewById(R.id.textview_blogpreview_date);
         webContent = (WebView) view.findViewById(R.id.webview_blogpreview_content);
 
-
         presenter = new BlogPreviewPresenter(this);
         presenter.loadBlogData(getActivity(),blogId);
     }
@@ -50,7 +49,6 @@ public class BlogPreviewFragment extends Fragment implements BlogPreviewContract
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void updateBlogData(BlogModel blog) {
-        getActivity().setTitle(blog.getTitle());
         textTitle.setText(blog.getTitle());
         textDate.setText(blog.getDate());
         webContent.getSettings().setJavaScriptEnabled(true);
