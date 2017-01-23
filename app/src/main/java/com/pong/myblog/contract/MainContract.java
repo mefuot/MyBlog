@@ -13,7 +13,7 @@ import java.util.List;
 public interface MainContract {
     interface MainView{
         void updateBlogList(List<BlogModel> list);
-        void gotoBlogEditPage(int blogId);
+        void gotoAddNewBlogPage();
         void gotoBlogPreviewPage(int blogId);
     }
     interface MainPresenter{

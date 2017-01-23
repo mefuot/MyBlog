@@ -6,4 +6,5 @@ package com.pong.myblog.listener;
 
 public interface OnMainFragmentListener {
     void onGoToCreateNewBlog();
+    void onGoToBlogPreview(int blogId);
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.pong.myblog.R;
@@ -39,14 +40,11 @@ public class MainFragment extends Fragment implements MainContract.MainView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gotoBlogEditPage(-1);
+                gotoAddNewBlogPage();
             }
         });
 
@@ -54,6 +52,13 @@ public class MainFragment extends Fragment implements MainContract.MainView {
         adapter = new MainBlogAdapter(getActivity(),null);
         listView.setAdapter(adapter);
         listView.setDividerHeight(0);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("MyBlog","item click");
+                gotoBlogPreviewPage(adapter.getItem(position).getId());
+            }
+        });
 
         presenter = new MainPresenter(this);
     }
@@ -70,16 +75,12 @@ public class MainFragment extends Fragment implements MainContract.MainView {
     }
 
     @Override
-    public void gotoBlogEditPage(int blogId) {
-        if(blogId > 0){
-//            ((OnMainFragmentListener) getActivity()).onGoToExistBlog();
-        }else{
-            ((OnMainFragmentListener) getActivity()).onGoToCreateNewBlog();
-        }
+    public void gotoAddNewBlogPage() {
+        ((OnMainFragmentListener) getActivity()).onGoToCreateNewBlog();
     }
 
     @Override
     public void gotoBlogPreviewPage(int blogId) {
-
+        ((OnMainFragmentListener) getActivity()).onGoToBlogPreview(blogId);
     }
 }
