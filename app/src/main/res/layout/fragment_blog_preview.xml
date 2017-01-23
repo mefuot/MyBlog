@@ -1,52 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button_blogpreview_edit"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textview_blogpreview_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="Edit"/>
+            android:layout_marginStart="@dimen/padding_small"
+            android:layout_marginEnd="@dimen/padding_small"
+            android:paddingTop="@dimen/padding"
+            android:text="Title"
+            android:textSize="@dimen/font_title"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textview_blogpreview_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_small"
+            android:paddingStart="@dimen/padding_small"
+            android:paddingBottom="@dimen/padding"
+            android:text="Date"
+            android:textSize="@dimen/font_normal" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textview_blogpreview_title"
+            <WebView
+                android:id="@+id/webview_blogpreview_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/font_title"
-                android:paddingTop="@dimen/padding"
-                android:paddingStart="@dimen/padding_small"
-                android:paddingEnd="@dimen/padding_small"
-                android:text="Title"/>
-
-            <TextView
-                android:id="@+id/textview_blogpreview_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/padding_small"
-                android:paddingEnd="@dimen/padding_small"
-                android:textSize="@dimen/font_normal"
-                android:text="Date"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <WebView
-                    android:id="@+id/webview_blogpreview_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                android:layout_height="wrap_content" />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>
