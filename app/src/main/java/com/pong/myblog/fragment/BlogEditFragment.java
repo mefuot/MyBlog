@@ -299,16 +299,44 @@ public class BlogEditFragment extends Fragment implements BlogEditContract.BlogE
     }
 
     private void onSaveButtonClicked() {
-        BlogModel blog = new BlogModel();
-        blog.setTitle(textTitle.getText().toString());
-        blog.setDate(textDate.getText().toString());
-        blog.setContent(editor.getHtml());
+        if(isBlogDataValid()) {
+            BlogModel blog = new BlogModel();
+            blog.setTitle(textTitle.getText().toString());
+            blog.setDate(textDate.getText().toString());
+            blog.setContent(editor.getHtml());
 
-        if (blogId > 0) {
-            presenter.editExistBlogData(blogId, blog);
-        } else {
-            presenter.insertNewBlog(blog);
+            if (blogId > 0) {
+                presenter.editExistBlogData(blogId, blog);
+            } else {
+                presenter.insertNewBlog(blog);
+            }
         }
+    }
+
+    private boolean isBlogDataValid(){
+        if(textTitle.getText().toString().isEmpty()) {
+            showAlertDialog("Please enter Blog Title");
+            return false;
+        }
+        else if(textDate.getText().toString().isEmpty()) {
+            showAlertDialog("Please enter Blog Date");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void showAlertDialog(String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     @Override
