@@ -43,7 +43,14 @@ public class BlogPreviewFragment extends Fragment implements BlogPreviewContract
         webContent = (WebView) view.findViewById(R.id.webview_blogpreview_content);
 
         presenter = new BlogPreviewPresenter(this);
-        presenter.loadBlogData(getActivity(),blogId);
+    }
+
+    @Override
+    public void onResume() {
+        if (presenter != null) {
+            presenter.loadBlogData(getActivity(), blogId);
+        }
+        super.onResume();
     }
 
     @SuppressLint("SetJavaScriptEnabled")

@@ -33,7 +33,7 @@ public class BlogEditPresenter implements BlogEditContract.BlogEditPresenter {
 
     @Override
     public void editExistBlogData(int blogId, BlogModel blog) {
-//        db.updateBlog()
+        db.updateBlog(blogId, blog);
         view.onModifiedBlogData();
     }
 
