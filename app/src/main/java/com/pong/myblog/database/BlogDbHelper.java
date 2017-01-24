@@ -44,17 +44,17 @@ public class BlogDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public List<BlogModel> getAllBlog(){
-        SQLiteDatabase  db = this.getWritableDatabase();
-        Cursor mCursor = db.rawQuery("SELECT " + BlogModel.BlogColumns._ID + ", "  +
+    public List<BlogModel> getAllBlog() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor mCursor = db.rawQuery("SELECT " + BlogModel.BlogColumns._ID + ", " +
                 BlogModel.BlogColumns.COLUMN_NAME_TITLE + ", " +
                 BlogModel.BlogColumns.COLUMN_NAME_DATE + ", " +
-                BlogModel.BlogColumns.COLUMN_NAME_CONTENT  + " FROM " +
+                BlogModel.BlogColumns.COLUMN_NAME_CONTENT + " FROM " +
                 BlogModel.BlogColumns.TABLE_NAME, null);
 
         List<BlogModel> list = new ArrayList<>();
 
-        while ( mCursor.moveToNext() ){
+        while (mCursor.moveToNext()) {
             BlogModel blog = new BlogModel();
             blog.setId(mCursor.getInt(mCursor.getColumnIndex(BlogModel.BlogColumns._ID)));
             blog.setTitle(mCursor.getString(mCursor.getColumnIndex(BlogModel.BlogColumns.COLUMN_NAME_TITLE)));
@@ -69,18 +69,18 @@ public class BlogDbHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    public BlogModel getBlogById(int blogId){
-        SQLiteDatabase  db = this.getWritableDatabase();
-        Cursor mCursor = db.rawQuery("SELECT " + BlogModel.BlogColumns._ID + ", "  +
+    public BlogModel getBlogById(int blogId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor mCursor = db.rawQuery("SELECT " + BlogModel.BlogColumns._ID + ", " +
                 BlogModel.BlogColumns.COLUMN_NAME_TITLE + ", " +
                 BlogModel.BlogColumns.COLUMN_NAME_DATE + ", " +
-                BlogModel.BlogColumns.COLUMN_NAME_CONTENT  + " FROM " +
+                BlogModel.BlogColumns.COLUMN_NAME_CONTENT + " FROM " +
                 BlogModel.BlogColumns.TABLE_NAME + " WHERE " +
-                BlogModel.BlogColumns._ID +" = "+blogId, null);
+                BlogModel.BlogColumns._ID + " = " + blogId, null);
 
         BlogModel blog = new BlogModel();
 
-        while ( mCursor.moveToNext() ){
+        while (mCursor.moveToNext()) {
             blog.setId(mCursor.getInt(mCursor.getColumnIndex(BlogModel.BlogColumns._ID)));
             blog.setTitle(mCursor.getString(mCursor.getColumnIndex(BlogModel.BlogColumns.COLUMN_NAME_TITLE)));
             blog.setDate(mCursor.getString(mCursor.getColumnIndex(BlogModel.BlogColumns.COLUMN_NAME_DATE)));
@@ -92,13 +92,23 @@ public class BlogDbHelper extends SQLiteOpenHelper {
         return blog;
     }
 
-    public Long insertBlog(BlogModel blog){
-        SQLiteDatabase  db = this.getWritableDatabase();
+    public Long insertBlog(BlogModel blog) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(BlogModel.BlogColumns.COLUMN_NAME_TITLE, blog.getTitle());
         values.put(BlogModel.BlogColumns.COLUMN_NAME_DATE, blog.getDate());
         values.put(BlogModel.BlogColumns.COLUMN_NAME_CONTENT, blog.getContent());
 
         return db.insert(BlogModel.BlogColumns.TABLE_NAME, null, values);
+    }
+
+    public Integer updateBlog(int blogId, BlogModel blog) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(BlogModel.BlogColumns.COLUMN_NAME_TITLE, blog.getTitle());
+        values.put(BlogModel.BlogColumns.COLUMN_NAME_DATE, blog.getDate());
+        values.put(BlogModel.BlogColumns.COLUMN_NAME_CONTENT, blog.getContent());
+
+        return db.update(BlogModel.BlogColumns.TABLE_NAME, values, "_id=" + blogId, null);
     }
 }
