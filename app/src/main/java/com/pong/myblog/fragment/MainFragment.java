@@ -49,13 +49,12 @@ public class MainFragment extends Fragment implements MainContract.MainView {
         });
 
         ListView listView = (ListView) view.findViewById(R.id.listview);
-        adapter = new MainBlogAdapter(getActivity(),null);
+        adapter = new MainBlogAdapter(getActivity(), null);
         listView.setAdapter(adapter);
         listView.setDividerHeight(0);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("MyBlog","item click");
                 gotoBlogPreviewPage(adapter.getItem(position).getId());
             }
         });
@@ -65,8 +64,10 @@ public class MainFragment extends Fragment implements MainContract.MainView {
 
     @Override
     public void onResume() {
+        if (presenter != null) {
+            presenter.loadAllBlog(getActivity());
+        }
         super.onResume();
-        presenter.loadAllBlog(getActivity());
     }
 
     @Override
